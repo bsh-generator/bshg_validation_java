@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class LongsImpl<TO> extends TypeValidatorImpl<Long, TO> implements Longs<TO> {
+public class LongsImpl<TO> extends TypeValidatorImpl<Long, TO, Longs<TO>> implements Longs<TO> {
     @Override
     public Longs<TO> onError(Function<Long, Boolean> error, String message) {
         super.onError(error, message);

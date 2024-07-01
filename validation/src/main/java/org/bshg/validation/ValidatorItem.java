@@ -92,7 +92,7 @@ public class ValidatorItem<T, TO> {
             return this;
         }
 
-        public Builder<T, TO> validations(TypeValidator<T, TO> validation) {
+        public Builder<T, TO> validations(TypeValidator<T, TO, ?> validation) {
             validatorItem.validations = validation.getValidations();
             return this;
         }

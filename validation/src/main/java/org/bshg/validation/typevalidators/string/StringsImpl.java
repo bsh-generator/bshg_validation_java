@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-public class StringsImpl<TO> extends TypeValidatorImpl<String, TO> implements Strings<TO> {
+public class StringsImpl<TO> extends TypeValidatorImpl<String, TO, Strings<TO>> implements Strings<TO> {
     @Override
     public Strings<TO> onError(Function<String, Boolean> error, String message) {
         super.onError(error, message);

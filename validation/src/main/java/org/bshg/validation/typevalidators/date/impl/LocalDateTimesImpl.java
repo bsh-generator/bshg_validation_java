@@ -1,16 +1,11 @@
 package org.bshg.validation.typevalidators.date.impl;
 
-import org.bshg.validation.ValidatorItem;
 import org.bshg.validation.typevalidators.TypeValidatorImpl;
-import org.bshg.validation.typevalidators.date.DateTimes;
+import org.bshg.validation.typevalidators.date.LocalDateTimes;
 
 import java.time.LocalDateTime;
 
-public class DateTimesImpl<TO> extends TypeValidatorImpl<LocalDateTime, TO> implements DateTimes<TO> {
-    public DateTimesImpl(ValidatorItem<LocalDateTime, TO> validatorItem) {
-        super(validatorItem);
-    }
-
+public class LocalDateTimesImpl<TO> extends TypeValidatorImpl<LocalDateTime, TO, LocalDateTimes<TO>> implements LocalDateTimes<TO> {
 //    @Override
 //    public DateTimesImpl onError(boolean errorCondition, String errorMsg) {
 //        super.onError(errorCondition, errorMsg);

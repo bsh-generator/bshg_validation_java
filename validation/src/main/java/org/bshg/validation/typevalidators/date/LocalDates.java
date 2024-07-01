@@ -4,7 +4,7 @@ import org.bshg.validation.typevalidators.TypeValidator;
 
 import java.time.LocalDate;
 
-public interface Dates<TO> extends TypeValidator<LocalDate, TO> {
+public interface LocalDates<TO> extends TypeValidator<LocalDate, TO, LocalDates<TO>> {
 //    Dates onError(boolean errorCondition, String errorMsg);
 //
 //    Dates required();

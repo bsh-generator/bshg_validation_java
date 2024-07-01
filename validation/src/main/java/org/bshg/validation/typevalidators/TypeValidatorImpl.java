@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class TypeValidatorImpl<T, TO> implements TypeValidator<T, TO> {
+public class TypeValidatorImpl<T, TO, TTypeValidator extends TypeValidator<T, TO, TTypeValidator>> implements TypeValidator<T, TO, TTypeValidator> {
     public TypeValidatorImpl() {
     }
 
@@ -44,26 +44,31 @@ public class TypeValidatorImpl<T, TO> implements TypeValidator<T, TO> {
     }
 
     @Override
-    public TypeValidator<T, TO> onError(Function<T, Boolean> error, String message) {
+    public TTypeValidator onError(Function<T, Boolean> error, String message) {
         getValidations().add(new ValidatorFnConfig<>(error, message));
-        return this;
+        return self();
     }
 
     @Override
-    public TypeValidator<T, TO> onError(Function<T, Boolean> error, Supplier<String> message) {
+    public TTypeValidator onError(Function<T, Boolean> error, Supplier<String> message) {
         getValidations().add(new ValidatorFnConfig<>(error, message));
-        return this;
+        return self();
     }
 
     @Override
-    public TypeValidator<T, TO> onError(BiFunction<T, TO, Boolean> error, String message) {
+    public TTypeValidator onError(BiFunction<T, TO, Boolean> error, String message) {
         getValidations().add(new ValidatorFnConfig<>(error, message));
-        return this;
+        return self();
     }
 
     @Override
-    public TypeValidator<T, TO> onError(BiFunction<T, TO, Boolean> error, Supplier<String> message) {
+    public TTypeValidator onError(BiFunction<T, TO, Boolean> error, Supplier<String> message) {
         getValidations().add(new ValidatorFnConfig<>(error, message));
-        return this;
+        return self();
+    }
+
+    @SuppressWarnings("unchecked")
+    private TTypeValidator self() {
+        return (TTypeValidator) this;
     }
 }

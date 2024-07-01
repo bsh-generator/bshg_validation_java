@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class IntegersImpl<TO> extends TypeValidatorImpl<Integer, TO> implements Integers<TO> {
+public class IntegersImpl<TO> extends TypeValidatorImpl<Integer, TO, Integers<TO>> implements Integers<TO> {
     @Override
     public Integers<TO> onError(Function<Integer, Boolean> error, String message) {
         super.onError(error, message);

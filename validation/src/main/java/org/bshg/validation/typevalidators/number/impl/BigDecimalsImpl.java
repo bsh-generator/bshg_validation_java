@@ -10,7 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class BigDecimalsImpl<TO> extends TypeValidatorImpl<BigDecimal, TO> implements BigDecimals<TO> {
+public class BigDecimalsImpl<TO> extends TypeValidatorImpl<BigDecimal, TO, BigDecimals<TO>> implements BigDecimals<TO> {
     @Override
     public BigDecimals<TO> onError(Function<BigDecimal, Boolean> error, String message) {
         super.onError(error, message);

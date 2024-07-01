@@ -6,11 +6,7 @@ import org.bshg.validation.typevalidators.array.Lists;
 
 import java.util.List;
 
-public class ListsImpl<T, TO> extends TypeValidatorImpl<List<T>, TO> implements Lists<T, TO> {
-    public ListsImpl(ValidatorItem<List<T>, TO> validatorItem) {
-        super(validatorItem);
-    }
-
+public class ListsImpl<T, TO> extends TypeValidatorImpl<List<T>, TO, Lists<T, TO>> implements Lists<T, TO> {
 //    @Override
 //    public ListsImpl<T> onError(boolean errorCondition, String errorMsg) {
 //        super.onError(errorCondition, errorMsg);

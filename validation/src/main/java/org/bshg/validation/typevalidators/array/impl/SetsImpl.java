@@ -6,11 +6,7 @@ import org.bshg.validation.typevalidators.array.Sets;
 
 import java.util.Set;
 
-public class SetsImpl<T, TO> extends TypeValidatorImpl<Set<T>, TO> implements Sets<T, TO> {
-    public SetsImpl(ValidatorItem<Set<T>, TO> validatorItem) {
-        super(validatorItem);
-    }
-
+public class SetsImpl<T, TO> extends TypeValidatorImpl<Set<T>, TO, Sets<T, TO>> implements Sets<T, TO> {
 //    @Override
 //    public SetsImpl<T> onError(boolean errorCondition, String errorMsg) {
 //        super.onError(errorCondition, errorMsg);

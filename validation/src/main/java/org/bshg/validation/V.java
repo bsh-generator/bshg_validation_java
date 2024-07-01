@@ -8,7 +8,10 @@ import org.bshg.validation.typevalidators.string.Strings;
 import org.bshg.validation.typevalidators.string.StringsImpl;
 
 public class V {
-    public static <T, TO> TypeValidator<T, TO> costume(ValidatorItem<T, TO> item) {
+    ////////////////////////////
+    //////// COSTUME ///////////
+    ////////////////////////////
+    public static <T, TO> TypeValidator<T, TO, ?> costume(ValidatorItem<T, TO> item) {
         return new TypeValidatorImpl<>();
     }
 

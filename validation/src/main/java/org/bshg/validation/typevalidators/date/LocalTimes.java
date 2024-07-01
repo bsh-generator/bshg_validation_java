@@ -4,7 +4,7 @@ import org.bshg.validation.typevalidators.TypeValidator;
 
 import java.time.LocalTime;
 
-public interface Times<TO> extends TypeValidator<LocalTime, TO> {
+public interface LocalTimes<TO> extends TypeValidator<LocalTime, TO, LocalTimes<TO>> {
 //    Times onError(boolean errorCondition, String errorMsg);
 //
 //    Times required();

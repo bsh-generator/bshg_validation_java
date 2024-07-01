@@ -7,7 +7,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-public interface Strings<TO>  extends TypeValidator<String, TO> {
+public interface Strings<TO>  extends TypeValidator<String, TO, Strings<TO>> {
     @Override
     Strings<TO> onError(Function<String, Boolean> error, String message);
 
