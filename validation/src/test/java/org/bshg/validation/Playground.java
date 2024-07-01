@@ -65,7 +65,7 @@ public class Playground {
         private final ValidatorItem<Long, User> id = ValidatorItem
                 .builder(this, () -> this.getItem().id())
                 .field("id")
-                .validations(V.longy(this.id).required().positive())
+                .validations(V.longs(this.id).required().positive())
                 .build();
     }
 

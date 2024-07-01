@@ -30,10 +30,6 @@ public class TypeValidatorImpl<T, TO> implements TypeValidator<T, TO> {
         this.validatorItem.error(msg);
     }
 
-    public TypeValidator<T, TO> required() {
-        return onError(Objects::isNull, "This field is required!");
-    }
-
     protected StringsErrors errors() {
         return LocalUtils.local().messages().string();
     }

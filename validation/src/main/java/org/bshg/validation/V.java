@@ -2,8 +2,8 @@ package org.bshg.validation;
 
 import org.bshg.validation.typevalidators.TypeValidator;
 import org.bshg.validation.typevalidators.TypeValidatorImpl;
-import org.bshg.validation.typevalidators.number.Longs;
-import org.bshg.validation.typevalidators.number.impl.LongsImpl;
+import org.bshg.validation.typevalidators.number.*;
+import org.bshg.validation.typevalidators.number.impl.*;
 import org.bshg.validation.typevalidators.string.Strings;
 import org.bshg.validation.typevalidators.string.StringsImpl;
 
@@ -22,18 +22,27 @@ public class V {
     ////////////////////////////
     //////// NUMBERS ///////////
     ////////////////////////////
-    public static <TO> Longs<TO> longy(ValidatorItem<Long, TO> item) {
+    public static <TO> Longs<TO> longs(ValidatorItem<Long, TO> item) {
         return new LongsImpl<>();
     }
 
-    /*public static <TO> Doubles doubly(ValidatorItem<Double> item) {
-        return new DoublesImpl(item);
+    public static <TO> Integers<TO> integer(ValidatorItem<Integer, TO> item) {
+        return new IntegersImpl<>();
     }
 
-    public static <TO> Integers integer(ValidatorItem<Integer, TO> item) {
-        return new IntegersImpl(item);
+    public static <TO> Doubles<TO> doubles(ValidatorItem<Double, TO> item) {
+        return new DoublesImpl<>();
     }
 
+    public static <TO> Floats<TO> floats(ValidatorItem<Float, TO> item) {
+        return new FloatsImpl<>();
+    }
+
+    public static <TO> BigDecimals<TO> bigDecimal(ValidatorItem<Float, TO> item) {
+        return new BigDecimalsImpl<>();
+    }
+
+    /*
     ////////////////////////////
     ///////// BOOLEANS /////////
     ////////////////////////////

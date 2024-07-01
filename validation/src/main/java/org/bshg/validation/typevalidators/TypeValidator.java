@@ -8,8 +8,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface TypeValidator<T, TO> {
-    TypeValidator<T, TO> required();
-
     List<ValidatorFnConfig<T, TO>> getValidations();
 
     TypeValidator<T, TO> onError(Function<T, Boolean> error, String message);
