@@ -4,48 +4,15 @@ import org.bshg.validation.typevalidators.TypeValidatorImpl;
 import org.bshg.validation.utils.Regex;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 public class StringsImpl<TO> extends TypeValidatorImpl<String, TO, Strings<TO>> implements Strings<TO> {
-    @Override
-    public Strings<TO> onError(Function<String, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Strings<TO> onError(Function<String, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Strings<TO> onError(BiFunction<String, TO, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Strings<TO> onError(BiFunction<String, TO, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
-
-    //////////////////////////////////////////
-
     public Strings<TO> required() {
         return onError(Objects::isNull, "This field is required!");
     }
 
     public Strings<TO> notEmpty() {
-        return onError(
-                value -> value != null && value.isEmpty(),
-                errors().notEmpty()
-        );
+        return onError(value -> value != null && value.isEmpty(), errors().notEmpty());
     }
 
     public Strings<TO> min(int length) {

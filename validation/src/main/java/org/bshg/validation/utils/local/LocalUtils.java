@@ -12,17 +12,14 @@ public class LocalUtils {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try (InputStream inputStream = LocalUtils.class.getResourceAsStream(path)) {
-            if (inputStream == null) {
-                throw new IOException("Resource not found: " + path);
-            }
+            if (inputStream == null) throw new IOException("Resource not found: " + path);
             return objectMapper.readValue(inputStream, Local.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
-
-    private static Local local;
+   private static Local local;
 
     public static Local local() {
         if (local == null)

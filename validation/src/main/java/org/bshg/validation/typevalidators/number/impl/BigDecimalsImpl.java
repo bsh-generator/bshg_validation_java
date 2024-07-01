@@ -6,35 +6,8 @@ import org.bshg.validation.typevalidators.number.BigDecimals;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class BigDecimalsImpl<TO> extends TypeValidatorImpl<BigDecimal, TO, BigDecimals<TO>> implements BigDecimals<TO> {
-    @Override
-    public BigDecimals<TO> onError(Function<BigDecimal, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public BigDecimals<TO> onError(Function<BigDecimal, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public BigDecimals<TO> onError(BiFunction<BigDecimal, TO, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public BigDecimals<TO> onError(BiFunction<BigDecimal, TO, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
     @Override
     public BigDecimals<TO> required() {
         return onError(Objects::isNull, "This field is required!");

@@ -4,36 +4,8 @@ import org.bshg.validation.typevalidators.TypeValidatorImpl;
 import org.bshg.validation.typevalidators.number.Longs;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class LongsImpl<TO> extends TypeValidatorImpl<Long, TO, Longs<TO>> implements Longs<TO> {
-    @Override
-    public Longs<TO> onError(Function<Long, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Longs<TO> onError(Function<Long, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Longs<TO> onError(BiFunction<Long, TO, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Longs<TO> onError(BiFunction<Long, TO, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-    ////////////////////
-
     @Override
     public Longs<TO> required() {
         return onError(Objects::isNull, "This field is required!");

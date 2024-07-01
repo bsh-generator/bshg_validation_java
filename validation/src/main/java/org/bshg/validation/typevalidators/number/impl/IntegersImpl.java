@@ -4,36 +4,8 @@ import org.bshg.validation.typevalidators.TypeValidatorImpl;
 import org.bshg.validation.typevalidators.number.Integers;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class IntegersImpl<TO> extends TypeValidatorImpl<Integer, TO, Integers<TO>> implements Integers<TO> {
-    @Override
-    public Integers<TO> onError(Function<Integer, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Integers<TO> onError(Function<Integer, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Integers<TO> onError(BiFunction<Integer, TO, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Integers<TO> onError(BiFunction<Integer, TO, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-    ////////////////////
-
     @Override
     public Integers<TO> required() {
         return onError(Objects::isNull, "This field is required!");

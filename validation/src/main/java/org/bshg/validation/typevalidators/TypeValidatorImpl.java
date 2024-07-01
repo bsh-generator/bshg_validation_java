@@ -7,12 +7,12 @@ import org.bshg.validation.utils.local.errors.StringsErrors;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class TypeValidatorImpl<T, TO, TTypeValidator extends TypeValidator<T, TO, TTypeValidator>> implements TypeValidator<T, TO, TTypeValidator> {
+public class TypeValidatorImpl<T, TO, TTypeValidator extends TypeValidator<T, TO, TTypeValidator>>
+        implements TypeValidator<T, TO, TTypeValidator> {
     public TypeValidatorImpl() {
     }
 

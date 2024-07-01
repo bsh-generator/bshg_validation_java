@@ -2,26 +2,9 @@ package org.bshg.validation.typevalidators.string;
 
 import org.bshg.validation.typevalidators.TypeValidator;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-public interface Strings<TO>  extends TypeValidator<String, TO, Strings<TO>> {
-    @Override
-    Strings<TO> onError(Function<String, Boolean> error, String message);
-
-    @Override
-    Strings<TO> onError(Function<String, Boolean> error, Supplier<String> message);
-
-    @Override
-    Strings<TO> onError(BiFunction<String, TO, Boolean> error, String message);
-
-    @Override
-    Strings<TO> onError(BiFunction<String, TO, Boolean> error, Supplier<String> message);
-
-    ///////////////////////////////////
-
+public interface Strings<TO> extends TypeValidator<String, TO, Strings<TO>> {
     Strings<TO> required();
 
     Strings<TO> notEmpty();

@@ -4,36 +4,8 @@ import org.bshg.validation.typevalidators.TypeValidatorImpl;
 import org.bshg.validation.typevalidators.number.Floats;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class FloatsImpl<TO> extends TypeValidatorImpl<Float, TO, Floats<TO>> implements Floats<TO> {
-    @Override
-    public Floats<TO> onError(Function<Float, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Floats<TO> onError(Function<Float, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Floats<TO> onError(BiFunction<Float, TO, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Floats<TO> onError(BiFunction<Float, TO, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-    ////////////////////
-
     @Override
     public Floats<TO> required() {
         return onError(Objects::isNull, "This field is required!");

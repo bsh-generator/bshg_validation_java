@@ -20,18 +20,6 @@ public class Playground {
     }
 
     static class UserValidator extends Validator<User> {
-//        private final ValidatorItem<String, User> username = ValidatorItem.build(
-//                this, "username",
-//                () -> this.getItem().username(),
-//                V.string(this.username).required().notEmpty().alpha()
-//        );
-//        private final ValidatorItem<Role> role = new ValidatorItem<>(
-//                this, "role",
-//                () -> this.getItem().role(),
-//                V.costume()
-//                        .onError(value -> value.local() == null, "local is required")
-//        );
-
         public UserValidator(User item) {
             super(item);
         }

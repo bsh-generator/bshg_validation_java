@@ -4,36 +4,8 @@ import org.bshg.validation.typevalidators.TypeValidatorImpl;
 import org.bshg.validation.typevalidators.number.Doubles;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class DoublesImpl<TO> extends TypeValidatorImpl<Double, TO, Doubles<TO>> implements Doubles<TO> {
-    @Override
-    public Doubles<TO> onError(Function<Double, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Doubles<TO> onError(Function<Double, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Doubles<TO> onError(BiFunction<Double, TO, Boolean> error, String message) {
-        super.onError(error, message);
-        return this;
-    }
-
-    @Override
-    public Doubles<TO> onError(BiFunction<Double, TO, Boolean> error, Supplier<String> message) {
-        super.onError(error, message);
-        return this;
-    }
-    ////////////////////
-
     @Override
     public Doubles<TO> required() {
         return onError(Objects::isNull, "This field is required!");
