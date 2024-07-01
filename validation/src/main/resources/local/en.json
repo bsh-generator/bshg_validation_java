@@ -1,0 +1,34 @@
+{
+  "local": "en",
+  "messages": {
+    "string": {
+      "required": "This field is required!",
+      "notEmpty": "This field is required!",
+      "min": "Minimum length required is %1",
+      "max": "Maximum length allowed is %1",
+      "includes": "Must include \"%1\"",
+      "includesAll": "Must include all of: %1",
+      "startsWith": "Must start with \"%1\"",
+      "endsWith": "Must end with \"%1\"",
+      "matches": "Does not match the required pattern",
+      "email": "Invalid email format",
+      "phone": "Invalid phone format",
+      "url": "Invalid URL format",
+      "date": "Invalid date format",
+      "time": "Invalid time format",
+      "hexColor": "Invalid hex color format",
+      "creditCard": "Invalid credit card number format",
+      "htmlTag": "Invalid HTML tag format",
+      "base64": "Invalid Base64 format",
+      "alphanumeric": "Must contain only alphanumeric characters",
+      "numeric": "Must contain only numeric characters",
+      "alpha": "Must contain only alphabetic characters"
+    },
+    "number": null,
+    "bool": null,
+    "array": null,
+    "date": null,
+    "datetime": null,
+    "time": null
+  }
+}
