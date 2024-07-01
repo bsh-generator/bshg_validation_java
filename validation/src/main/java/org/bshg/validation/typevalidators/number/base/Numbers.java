@@ -9,7 +9,8 @@ import org.bshg.validation.typevalidators.TypeValidator;
  * @param <TObject>      The type of object to validate.
  * @param <TTypeValidator> The type of the implementing validator.
  */
-public interface Numbers<TNumber, TObject, TTypeValidator extends Numbers<TNumber, TObject, TTypeValidator>> extends TypeValidator<TNumber, TObject, TTypeValidator> {
+public interface Numbers<TNumber, TObject, TTypeValidator extends Numbers<TNumber, TObject, TTypeValidator>>
+        extends TypeValidator<TNumber, TObject, TTypeValidator> {
     /**
      * Specifies that the numeric value is required (non-null or non-zero).
      *

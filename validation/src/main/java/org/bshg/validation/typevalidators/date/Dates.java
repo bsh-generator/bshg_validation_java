@@ -2,7 +2,7 @@ package org.bshg.validation.typevalidators.date;
 
 import org.bshg.validation.typevalidators.date.base.BaseDate;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-public interface LocalDates<TO> extends BaseDate<LocalDate, TO, LocalDates<TO>> {
+public interface Dates<TO> extends BaseDate<Date, TO, Dates<TO>> {
 }

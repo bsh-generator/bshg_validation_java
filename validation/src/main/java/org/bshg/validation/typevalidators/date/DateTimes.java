@@ -4,5 +4,5 @@ import org.bshg.validation.typevalidators.date.base.BaseDateTime;
 
 import java.time.LocalDateTime;
 
-public interface LocalDateTimes<TO> extends BaseDateTime<LocalDateTime, TO, LocalDateTimes<TO>> {
+public interface DateTimes<TO> extends BaseDateTime<LocalDateTime, TO, DateTimes<TO>> {
 }
