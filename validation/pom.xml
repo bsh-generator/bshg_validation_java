@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.bshg</groupId>
     <artifactId>validation</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <name>validation</name>
     <packaging>jar</packaging>
 
@@ -36,7 +36,7 @@
 
     <distributionManagement>
         <repository>
-            <id>github-bshg_validation_java</id>
+            <id>github-bsh-generator</id>
             <name>GitHub org.bshg Apache Maven Packages</name>
             <url>https://maven.pkg.github.com/bsh-generator/bshg_validation_java</url>
         </repository>

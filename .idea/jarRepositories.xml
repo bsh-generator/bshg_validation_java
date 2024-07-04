@@ -2,6 +2,11 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
+      <option name="id" value="github-bsh-generator" />
+      <option name="name" value="github-bsh-generator" />
+      <option name="url" value="https://maven.pkg.github.com/bsh-generator/bshg_validation_java" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
