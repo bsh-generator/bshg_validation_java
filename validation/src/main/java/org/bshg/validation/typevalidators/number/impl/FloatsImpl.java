@@ -66,35 +66,4 @@ public class FloatsImpl<TO> extends TypeValidatorImpl<Float, TO, Floats<TO>> imp
     public Floats<TO> divisibleBy(Float divisor) {
         return onError(value -> value % divisor != 0, errors().divisibleBy(), new Object[]{divisor});
     }
-
-    @Override
-    public Floats<TO> perfectSquare() {
-        return onError(value -> Math.sqrt(value) != Math.abs(Math.sqrt(value)), errors().perfectSquare());
-    }
-
-    @Override
-    public Floats<TO> primeNumber() {
-        return onError(value -> {
-            if (value < 2) return true;
-            for (var i = 2; i <= Math.sqrt(value); i++) {
-                if (value % i == 0) return true;
-            }
-            return false;
-        }, errors().primeNumber());
-    }
-
-    @Override
-    public Floats<TO> fibonacciNumber() {
-        return onError(value -> {
-            if (value < 0) return true;
-            var a = 0;
-            var b = 1;
-            while (b < value) {
-                var temp = b;
-                b += a;
-                a = temp;
-            }
-            return b != value;
-        }, errors().fibonacciNumber());
-    }
 }

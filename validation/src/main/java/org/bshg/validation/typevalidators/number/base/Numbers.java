@@ -95,34 +95,4 @@ public interface Numbers<TNumber, TObject, TTypeValidator extends Numbers<TNumbe
      * @return The current instance of the validator.
      */
     TTypeValidator divisibleBy(TNumber divisor);
-
-    /**
-     * Specifies that the numeric value must be a perfect square.
-     * Example:
-     * - Correct value: 16.0 (4^2)
-     * - Incorrect value: 10.0 (not a perfect square)
-     *
-     * @return The current instance of the validator.
-     */
-    TTypeValidator perfectSquare();
-
-    /**
-     * Specifies that the numeric value must be a prime number.
-     * Example:
-     * - Correct value: 17.0
-     * - Incorrect value: 15.0 (not a prime number)
-     *
-     * @return The current instance of the validator.
-     */
-    TTypeValidator primeNumber();
-
-    /**
-     * Specifies that the numeric value must be a Fibonacci number.
-     * Example:
-     * - Correct value: 8.0 (Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, ...)
-     * - Incorrect value: 10.0 (not a Fibonacci number)
-     *
-     * @return The current instance of the validator.
-     */
-    TTypeValidator fibonacciNumber();
 }

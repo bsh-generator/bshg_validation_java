@@ -69,42 +69,4 @@ public class BigDecimalsImpl<TO> extends TypeValidatorImpl<BigDecimal, TO, BigDe
     public BigDecimals<TO> divisibleBy(BigDecimal divisor) {
         return onError(value -> value.remainder(divisor).compareTo(BigDecimal.ZERO) != 0, errors().divisibleBy(), new Object[]{divisor});
     }
-
-    @Override
-    public BigDecimals<TO> perfectSquare() {
-        return onError(value -> {
-            BigDecimal sqrt = BigDecimal.valueOf(Math.sqrt(value.doubleValue()));
-            return sqrt.setScale(0, RoundingMode.HALF_UP).pow(2).compareTo(value) != 0;
-        }, errors().perfectSquare());
-    }
-
-    @Override
-    public BigDecimals<TO> primeNumber() {
-        return onError(value -> {
-            if (value.compareTo(BigDecimal.ONE) <= 0) return true;
-            if (value.compareTo(new BigDecimal(2)) == 0) return false;
-            if (value.remainder(new BigDecimal(2)).equals(BigDecimal.ZERO)) return true;
-
-            BigDecimal sqrt = BigDecimal.valueOf(Math.sqrt(value.doubleValue())).setScale(0, RoundingMode.HALF_UP);
-            for (BigDecimal i = new BigDecimal(3); i.compareTo(sqrt) <= 0; i = i.add(new BigDecimal(2))) {
-                if (value.remainder(i).equals(BigDecimal.ZERO)) return true;
-            }
-            return false;
-        }, errors().primeNumber());
-    }
-
-    @Override
-    public BigDecimals<TO> fibonacciNumber() {
-        return onError(value -> {
-            if (value.compareTo(BigDecimal.ZERO) < 0) return true;
-            BigDecimal a = BigDecimal.ZERO;
-            BigDecimal b = BigDecimal.ONE;
-            while (b.compareTo(value) < 0) {
-                BigDecimal temp = b;
-                b = b.add(a);
-                a = temp;
-            }
-            return b.compareTo(value) != 0;
-        }, errors().fibonacciNumber());
-    }
 }
