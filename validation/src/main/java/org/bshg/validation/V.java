@@ -2,10 +2,31 @@ package org.bshg.validation;
 
 import org.bshg.validation.typevalidators.TypeValidator;
 import org.bshg.validation.typevalidators.TypeValidatorImpl;
+import org.bshg.validation.typevalidators.array.Lists;
+import org.bshg.validation.typevalidators.array.Sets;
+import org.bshg.validation.typevalidators.array.impl.ListsImpl;
+import org.bshg.validation.typevalidators.array.impl.SetsImpl;
+import org.bshg.validation.typevalidators.bool.Booleans;
+import org.bshg.validation.typevalidators.bool.BooleansImpl;
+import org.bshg.validation.typevalidators.date.Dates;
+import org.bshg.validation.typevalidators.date.LocalDateTimes;
+import org.bshg.validation.typevalidators.date.LocalDates;
+import org.bshg.validation.typevalidators.date.LocalTimes;
+import org.bshg.validation.typevalidators.date.impl.DatesImpl;
+import org.bshg.validation.typevalidators.date.impl.LocalDateTimesImpl;
+import org.bshg.validation.typevalidators.date.impl.LocalDatesImpl;
+import org.bshg.validation.typevalidators.date.impl.LocalTimesImpl;
 import org.bshg.validation.typevalidators.number.*;
 import org.bshg.validation.typevalidators.number.impl.*;
 import org.bshg.validation.typevalidators.string.Strings;
 import org.bshg.validation.typevalidators.string.StringsImpl;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 public class V {
     ////////////////////////////
@@ -45,37 +66,40 @@ public class V {
         return new BigDecimalsImpl<>();
     }
 
-    /*
     ////////////////////////////
     ///////// BOOLEANS /////////
     ////////////////////////////
-    public static Booleans bool(ValidatorItem<Boolean> item) {
-        return new BooleansImpl(item);
+    public static <TO> Booleans<TO> bool(ValidatorItem<Boolean, TO> item) {
+        return new BooleansImpl<>();
     }
 
     ////////////////////////////
-    ////////// DATES ///////////
+    //// DATES AND TIMES ///////
     ////////////////////////////
-    public static Dates date(ValidatorItem<LocalDate> item) {
-        return new DatesImpl(item);
+    public static <TO> Dates<TO> date(ValidatorItem<Date, TO> item) {
+        return new DatesImpl<>();
     }
 
-    public static DateTimes datetime(ValidatorItem<LocalDateTime> item) {
-        return new DateTimesImpl(item);
+    public static <TO> LocalDates<TO> localDate(ValidatorItem<LocalDate, TO> item) {
+        return new LocalDatesImpl<>();
     }
 
-    public static Times time(ValidatorItem<LocalTime> item) {
-        return new TimesImpl(item);
+    public static <TO> LocalDateTimes<TO> localDateTimes(ValidatorItem<LocalDateTime, TO> item) {
+        return new LocalDateTimesImpl<>();
+    }
+
+    public static <TO> LocalTimes<TO> localTime(ValidatorItem<LocalTime, TO> item) {
+        return new LocalTimesImpl<>();
     }
 
     ////////////////////////////
     ////////// ARRAYS //////////
     ////////////////////////////
-    public static <T> Lists<T> list(ValidatorItem<List<T>> item) {
-        return new ListsImpl<>(item);
+    public static <T, TO> Lists<T, TO> list(ValidatorItem<List<T>, TO> item) {
+        return new ListsImpl<>();
     }
 
-    public static <T> Sets<T> set(ValidatorItem<Set<T>> item) {
-        return new SetsImpl<>(item);
-    }*/
+    public static <T, TO> Sets<T, TO> set(ValidatorItem<Set<T>, TO> item) {
+        return new SetsImpl<>();
+    }
 }
