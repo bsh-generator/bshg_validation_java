@@ -3,8 +3,10 @@ package org.bshg.validation;
 import org.bshg.validation.typevalidators.TypeValidator;
 import org.bshg.validation.typevalidators.config.ValidatorFnConfig;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 
 public class ValidatorItem<T, TO> {
     private boolean valid;
@@ -17,9 +19,36 @@ public class ValidatorItem<T, TO> {
         this.message = null;
     }
 
+    private void setMessage(ValidatorFnConfig<T, TO> fn) {
+        var message = fn.messageFn() != null ? fn.messageFn().get() : fn.message();
+        var args = fn.args();
+
+        // Regular expression to find %n patterns
+        var pattern = Pattern.compile("%(\\d+)");
+        var matcher = pattern.matcher(message);
+
+        StringBuilder sb = new StringBuilder();
+        while (matcher.find()) {
+            System.out.println(matcher.group(1));
+            var index = Integer.parseInt(matcher.group(1)) - 1;
+            var replacement = index < args.length ? Arrays.toString(args[index]) : "[null]";
+            // TODO remove [...] from the result
+            matcher.appendReplacement(sb, replacement);
+        }
+        matcher.appendTail(sb);
+
+        this.message = sb.toString();
+    }
+
+
     public void error(String msg) {
         this.valid = false;
         this.message = msg;
+    }
+
+    private void error(ValidatorFnConfig<T, TO> fn) {
+        this.valid = false;
+        this.setMessage(fn);
     }
 
     public ValidateResult<T> result() {
@@ -52,15 +81,14 @@ public class ValidatorItem<T, TO> {
     }
 
     private void condition(ValidatorFnConfig<T, TO> fn, TO object) {
-        var error = fn.errorDepend() != null?
-                fn.errorDepend().apply(this.field.get(), object):
-                fn.error() != null?
-                        fn.error().apply(this.field.get()):
+        var error = fn.errorDepend() != null ?
+                fn.errorDepend().apply(this.field.get(), object) :
+                fn.error() != null ?
+                        fn.error().apply(this.field.get()) :
                         false;
 
         if (error) {
-            var message = fn.messageFn() != null? fn.messageFn().get(): fn.message();
-            this.error(message);
+            this.error(fn);
             throw new RuntimeException();
         }
     }

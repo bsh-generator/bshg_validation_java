@@ -37,7 +37,7 @@ public class Playground {
         private final ValidatorItem<String, User> password = ValidatorItem
                 .builder(this, () -> this.getItem().password())
                 .field("password")
-                .validations(V.string(this.password).required())
+                .validations(V.string(this.password).required().min(10))
                 .build();
 
         private final ValidatorItem<String, User> confirmPassword = ValidatorItem
@@ -62,7 +62,7 @@ public class Playground {
     public static void main(String[] args) {
         User user = new User(
                 "BSH.G",
-                "password",
+                "12345678",
                 "password2",
                 new Role(null),
                 100L

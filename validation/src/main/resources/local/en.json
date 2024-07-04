@@ -6,10 +6,10 @@
       "notEmpty": "This field is required!",
       "min": "Minimum length required is %1",
       "max": "Maximum length allowed is %1",
-      "includes": "Must include \"%1\"",
+      "includes": "Must include '%1'",
       "includesAll": "Must include all of: %1",
-      "startsWith": "Must start with \"%1\"",
-      "endsWith": "Must end with \"%1\"",
+      "startsWith": "Must start with '%1'",
+      "endsWith": "Must end with '%1'",
       "matches": "Does not match the required pattern",
       "email": "Invalid email format",
       "phone": "Invalid phone format",
@@ -24,11 +24,78 @@
       "numeric": "Must contain only numeric characters",
       "alpha": "Must contain only alphabetic characters"
     },
-    "number": null,
-    "bool": null,
-    "array": null,
-    "date": null,
-    "datetime": null,
-    "time": null
+    "number": {
+      "required": "This field is required!",
+      "min": "Minimum value allowed is %1",
+      "max": "Maximum value allowed is %1",
+      "range": "Value must be between %1 and %2",
+      "positive": "Value must be positive",
+      "negative": "Value must be negative",
+      "multipleOf": "Value must be a multiple of %1",
+      "betweenExclusive": "Value must be between %1 and %2 (exclusive)",
+      "even": "Value must be even",
+      "odd": "Value must be odd",
+      "divisibleBy": "Value must be divisible by %1",
+      "perfectSquare": "Value must be a perfect square",
+      "primeNumber": "Value must be a prime number",
+      "fibonacciNumber": "Value must be a Fibonacci number",
+      "powerOfTwo": "Value must be a power of two"
+    },
+    "bool": {
+      "required": "This field is required!",
+      "trueValue": "Value must be true",
+      "falseValue": "Value must be false",
+      "isEqualTo": "Value must be equal to %1"
+    },
+    "array": {
+      "required": "This field is required!",
+      "minSize": "Minimum size is %1",
+      "maxSize": "Maximum size is %1",
+      "sizeBetween": "Size must be between %1 and %2",
+      "contains": "Must contain %1",
+      "satisfies": "All elements must satisfy the condition"
+    },
+    "date": {
+      "required": "This field is required!",
+      "equal": "Date must be equal to %1",
+      "after": "Date must be after %1",
+      "before": "Date must be before %1",
+      "between": "Date must be between %1 and %2",
+      "past": "Date must be in the past",
+      "future": "Date must be in the future",
+      "todayOrAfter": "Date must be today or after",
+      "todayOrBefore": "Date must be today or before",
+      "weekday": "Date must be a weekday",
+      "weekend": "Date must be a weekend",
+      "leapYear": "Date must be in a leap year"
+    },
+    "datetime": {
+      "required": "This field is required!",
+      "equal": "DateTime must be equal to %1",
+      "after": "DateTime must be after %1",
+      "before": "DateTime must be before %1",
+      "between": "DateTime must be between %1 and %2",
+      "past": "DateTime must be in the past",
+      "future": "DateTime must be in the future",
+      "todayOrAfter": "DateTime must be today or after",
+      "todayOrBefore": "DateTime must be today or before",
+      "weekday": "DateTime must be a weekday",
+      "weekend": "DateTime must be a weekend",
+      "leapYear": "DateTime must be in a leap year"
+    },
+    "time": {
+      "required": "This field is required!",
+      "equal": "Time must be equal to %1",
+      "after": "Time must be after %1",
+      "before": "Time must be before %1",
+      "between": "Time must be between %1 and %2",
+      "past": "Time must be in the past",
+      "future": "Time must be in the future",
+      "todayOrAfter": "Time must be today or after",
+      "todayOrBefore": "Time must be today or before",
+      "weekday": "Time must be on a weekday",
+      "weekend": "Time must be on a weekend",
+      "leapYear": "Time must be in a leap year"
+    }
   }
 }

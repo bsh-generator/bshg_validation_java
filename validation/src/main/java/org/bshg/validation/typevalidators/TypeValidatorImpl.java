@@ -2,8 +2,6 @@ package org.bshg.validation.typevalidators;
 
 import org.bshg.validation.ValidatorItem;
 import org.bshg.validation.typevalidators.config.ValidatorFnConfig;
-import org.bshg.validation.utils.local.LocalUtils;
-import org.bshg.validation.utils.local.errors.StringsErrors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +9,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class TypeValidatorImpl<T, TO, TTypeValidator extends TypeValidator<T, TO, TTypeValidator>>
+public class TypeValidatorImpl<T, TO, TTypeValidator
+        extends TypeValidator<T, TO, TTypeValidator>>
         implements TypeValidator<T, TO, TTypeValidator> {
+
     public TypeValidatorImpl() {
     }
 
@@ -30,10 +30,6 @@ public class TypeValidatorImpl<T, TO, TTypeValidator extends TypeValidator<T, TO
         this.validatorItem.error(msg);
     }
 
-    protected StringsErrors errors() {
-        return LocalUtils.local().messages().string();
-    }
-
     private List<ValidatorFnConfig<T, TO>> validations;
 
     @Override
@@ -44,26 +40,26 @@ public class TypeValidatorImpl<T, TO, TTypeValidator extends TypeValidator<T, TO
     }
 
     @Override
-    public TTypeValidator onError(Function<T, Boolean> error, String message) {
-        getValidations().add(new ValidatorFnConfig<>(error, message));
+    public TTypeValidator onError(Function<T, Boolean> error, String message, Object[] ...args) {
+        getValidations().add(new ValidatorFnConfig<>(error, message, args));
         return self();
     }
 
     @Override
-    public TTypeValidator onError(Function<T, Boolean> error, Supplier<String> message) {
-        getValidations().add(new ValidatorFnConfig<>(error, message));
+    public TTypeValidator onError(Function<T, Boolean> error, Supplier<String> message, Object[] ...args) {
+        getValidations().add(new ValidatorFnConfig<>(error, message, args));
         return self();
     }
 
     @Override
-    public TTypeValidator onError(BiFunction<T, TO, Boolean> error, String message) {
-        getValidations().add(new ValidatorFnConfig<>(error, message));
+    public TTypeValidator onError(BiFunction<T, TO, Boolean> error, String message, Object[] ...args) {
+        getValidations().add(new ValidatorFnConfig<>(error, message, args));
         return self();
     }
 
     @Override
-    public TTypeValidator onError(BiFunction<T, TO, Boolean> error, Supplier<String> message) {
-        getValidations().add(new ValidatorFnConfig<>(error, message));
+    public TTypeValidator onError(BiFunction<T, TO, Boolean> error, Supplier<String> message, Object[] ...args) {
+        getValidations().add(new ValidatorFnConfig<>(error, message, args));
         return self();
     }
 

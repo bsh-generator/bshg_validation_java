@@ -1,29 +1,43 @@
 package org.bshg.validation.utils.local;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.bshg.validation.config.Configure;
+import org.bshg.validation.config.Configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class LocalUtils {
-    public static Local local(String local) {
-        String path = "/local/" + local + ".json";
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        try (InputStream inputStream = LocalUtils.class.getResourceAsStream(path)) {
-            if (inputStream == null) throw new IOException("Resource not found: " + path);
-            return objectMapper.readValue(inputStream, Local.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-   private static Local local;
+    private static Local local;
 
     public static Local local() {
-        if (local == null)
-            local = LocalUtils.local(Configure.local);
+        if (local != null) return local;
+        String localString = Configuration.inst().getLocalString();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        InputStream inputStream = fetchLocalFromResource(localString)
+                .orElseThrow(() -> new RuntimeException("No File Provided To Fetch The Messages"));
+        try {
+            local = objectMapper.readValue(inputStream, Local.class);
+            inputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return local;
+    }
+
+    private static Optional<InputStream> fetchLocalFromResource(String local) {
+        Function<String, Optional<InputStream>> localFileByName = Configuration.inst().getLocalFileByName();
+        Supplier<Optional<InputStream>> localFile = Configuration.inst().getLocalFile();
+        if (localFileByName != null) return localFileByName.apply(local);
+        else if (localFile != null) return localFile.get();
+        return defaultFetchLocalFromResource(local);
+    }
+
+    private static Optional<InputStream> defaultFetchLocalFromResource(String local) {
+        String path = "/local/" + local + ".json";
+        return Optional.ofNullable(LocalUtils.class.getResourceAsStream(path));
     }
 }

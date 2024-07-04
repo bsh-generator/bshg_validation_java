@@ -17,7 +17,7 @@ public interface TypeValidator<T, TO, TTypeValidator extends TypeValidator<T, TO
      * @param message Error message to be used if the validation fails.
      * @return The current instance of the validator.
      */
-    TTypeValidator onError(Function<T, Boolean> error, String message);
+    TTypeValidator onError(Function<T, Boolean> error, String message, Object[] ...args);
 
     /**
      * Specifies an error condition and a supplier for the error message if validation fails.
@@ -26,7 +26,7 @@ public interface TypeValidator<T, TO, TTypeValidator extends TypeValidator<T, TO
      * @param message Supplier that provides the error message to be used if the validation fails.
      * @return The current instance of the validator.
      */
-    TTypeValidator onError(Function<T, Boolean> error, Supplier<String> message);
+    TTypeValidator onError(Function<T, Boolean> error, Supplier<String> message, Object[] ...args);
 
     /**
      * Specifies an error condition and corresponding error message if validation fails.
@@ -35,7 +35,7 @@ public interface TypeValidator<T, TO, TTypeValidator extends TypeValidator<T, TO
      * @param message Error message to be used if the validation fails.
      * @return The current instance of the validator.
      */
-    TTypeValidator onError(BiFunction<T, TO, Boolean> error, String message);
+    TTypeValidator onError(BiFunction<T, TO, Boolean> error, String message, Object[] ...args);
 
     /**
      * Specifies an error condition and a supplier for the error message if validation fails.
@@ -44,5 +44,5 @@ public interface TypeValidator<T, TO, TTypeValidator extends TypeValidator<T, TO
      * @param message Supplier that provides the error message to be used if the validation fails.
      * @return The current instance of the validator.
      */
-    TTypeValidator onError(BiFunction<T, TO, Boolean> error, Supplier<String> message);
+    TTypeValidator onError(BiFunction<T, TO, Boolean> error, Supplier<String> message, Object[] ...args);
 }

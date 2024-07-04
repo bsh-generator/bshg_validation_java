@@ -2,6 +2,8 @@ package org.bshg.validation.typevalidators.date.impl;
 
 import org.bshg.validation.typevalidators.TypeValidatorImpl;
 import org.bshg.validation.typevalidators.date.Dates;
+import org.bshg.validation.utils.local.LocalUtils;
+import org.bshg.validation.utils.local.errors.DatesErrors;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -11,49 +13,53 @@ public class DatesImpl<TO>
         extends TypeValidatorImpl<Date, TO, Dates<TO>>
         implements Dates<TO> {
 
+    protected DatesErrors errors() {
+        return LocalUtils.local().messages().date();
+    }
+
     @Override
     public Dates<TO> required() {
-        return onError(Objects::isNull, "This field is required!");
+        return onError(Objects::isNull, errors().required());
     }
 
     @Override
     public Dates<TO> equal(Date date) {
-        return onError(value -> !value.equals(date), "Date must be equal to " + date);
+        return onError(value -> !value.equals(date), errors().equal(), new Object[]{date});
     }
 
     @Override
     public Dates<TO> after(Date date) {
-        return onError(value -> !value.after(date), "Date must be after " + date);
+        return onError(value -> !value.after(date), errors().after(), new Object[]{date});
     }
 
     @Override
     public Dates<TO> before(Date date) {
-        return onError(value -> !value.before(date), "Date must be before " + date);
+        return onError(value -> !value.before(date), errors().before(), new Object[]{date});
     }
 
     @Override
     public Dates<TO> between(Date start, Date end) {
-        return onError(value -> value.before(start) || value.after(end), "Date must be between " + start + " and " + end);
+        return onError(value -> value.before(start) || value.after(end), errors().between(), new Object[]{start, end});
     }
 
     @Override
     public Dates<TO> past() {
-        return onError(value -> value.after(new Date()), "Date must be in the past");
+        return onError(value -> value.after(new Date()), errors().past());
     }
 
     @Override
     public Dates<TO> future() {
-        return onError(value -> value.before(new Date()), "Date must be in the future");
+        return onError(value -> value.before(new Date()), errors().future());
     }
 
     @Override
     public Dates<TO> todayOrAfter() {
-        return onError(value -> value.before(startOfDay(new Date())), "Date must be today or after");
+        return onError(value -> value.before(startOfDay(new Date())), errors().todayOrAfter());
     }
 
     @Override
     public Dates<TO> todayOrBefore() {
-        return onError(value -> value.after(endOfDay(new Date())), "Date must be today or before");
+        return onError(value -> value.after(endOfDay(new Date())), errors().todayOrBefore());
     }
 
     @Override
@@ -63,7 +69,7 @@ public class DatesImpl<TO>
             cal.setTime(value);
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
             return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
-        }, "Date must be a weekday");
+        }, errors().weekday());
     }
 
     @Override
@@ -73,7 +79,7 @@ public class DatesImpl<TO>
             cal.setTime(value);
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
             return dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY;
-        }, "Date must be a weekend");
+        }, errors().weekend());
     }
 
     @Override
@@ -83,7 +89,7 @@ public class DatesImpl<TO>
             cal.setTime(value);
             int year = cal.get(Calendar.YEAR);
             return !isLeapYear(year);
-        }, "Date must be in a leap year");
+        }, errors().leapYear());
     }
 
     private boolean isLeapYear(int year) {
