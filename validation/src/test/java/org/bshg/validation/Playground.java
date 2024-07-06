@@ -70,7 +70,7 @@ public class Playground {
         try {
             UserValidator.run(user);
         } catch (ValidatorException e) {
-            var results = e.getResults().simple();
+            var results = e.getResults().items();
             results.forEach(it -> System.out.println(it.getField() + ": " + it.isValid() + " -> " + it.getMessage()));
         }
     }

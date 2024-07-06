@@ -32,7 +32,7 @@ public class Validator<T> {
     public void validate() {
         this.applyAll();
         results = new ValidatorResult();
-        var itemsResult = results.simple();
+        var itemsResult = results.items();
 
         this.validatorItems.forEach(it -> itemsResult.add(it.result()));
 //        if (this.nestedValidators != null) {
