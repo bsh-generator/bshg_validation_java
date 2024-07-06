@@ -1,20 +1,20 @@
-package org.bshg.validation;
+package org.bshg.validation.results;
 
-public class ValidateResult<T> {
+public class TypeValidateResult<T> {
     private String field;
     private T value;
     private boolean valid;
     private String message;
 
-    public ValidateResult(String field, T value, boolean valid, String message) {
+    public TypeValidateResult(String field, T value, boolean valid, String message) {
         this.field = field;
         this.value = value;
         this.valid = valid;
         this.message = message;
     }
 
-    public static <T> ValidateResult<T> of(T value, String field, boolean valid, String message) {
-        return new ValidateResult<>(field, value, valid, message);
+    public static <T> TypeValidateResult<T> of(T value, String field, boolean valid, String message) {
+        return new TypeValidateResult<>(field, value, valid, message);
     }
 
     public String getField() {
@@ -35,6 +35,10 @@ public class ValidateResult<T> {
 
     public boolean isValid() {
         return valid;
+    }
+
+    public boolean isNotValid() {
+        return !valid;
     }
 
     public void setValid(boolean valid) {

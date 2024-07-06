@@ -1,5 +1,6 @@
 package org.bshg.validation;
 
+import org.bshg.validation.results.TypeValidateResult;
 import org.bshg.validation.typevalidators.TypeValidator;
 import org.bshg.validation.typevalidators.config.ValidatorFnConfig;
 
@@ -51,13 +52,13 @@ public class ValidatorItem<T, TO> {
         this.setMessage(fn);
     }
 
-    public ValidateResult<T> result() {
+    public TypeValidateResult<T> result() {
         return result(null);
     }
 
-    public ValidateResult<T> result(String prefix) {
+    public TypeValidateResult<T> result(String prefix) {
         String fieldname = (prefix != null ? prefix + "." : "") + fieldName;
-        return ValidateResult.of(field.get(), fieldname, valid, message);
+        return TypeValidateResult.of(field.get(), fieldname, valid, message);
     }
 
     // GETTERS AND SETTERS

@@ -2,7 +2,6 @@ package org.bshg.validation;
 
 import org.bshg.validation.exceptions.ValidatorException;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Playground {
@@ -24,7 +23,7 @@ public class Playground {
             super(item);
         }
 
-        public static void validate(User item) {
+        public static void run(User item) {
             new UserValidator(item).validate();
         }
 
@@ -69,9 +68,9 @@ public class Playground {
         );
 
         try {
-            UserValidator.validate(user);
+            UserValidator.run(user);
         } catch (ValidatorException e) {
-            List<ValidateResult<?>> results = e.getResults();
+            var results = e.getResults().simple();
             results.forEach(it -> System.out.println(it.getField() + ": " + it.isValid() + " -> " + it.getMessage()));
         }
     }

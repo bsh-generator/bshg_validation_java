@@ -1,14 +1,15 @@
 package org.bshg.validation.exceptions;
 
-import org.bshg.validation.ValidateResult;
+import org.bshg.validation.results.TypeValidateResult;
+import org.bshg.validation.results.ValidatorResult;
 
 import java.util.List;
 
 public class ValidatorException extends RuntimeException {
     private final int status = 400;
-    private final List<ValidateResult<?>> results;
+    private final ValidatorResult results;
 
-    public ValidatorException(List<ValidateResult<?>> results) {
+    public ValidatorException(ValidatorResult results) {
         this.results = results;
     }
 
@@ -16,7 +17,7 @@ public class ValidatorException extends RuntimeException {
         return status;
     }
 
-    public List<ValidateResult<?>> getResults() {
+    public ValidatorResult getResults() {
         return results;
     }
 }
