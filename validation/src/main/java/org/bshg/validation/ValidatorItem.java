@@ -38,7 +38,7 @@ public class ValidatorItem<T, TO> implements IValidatorItem<T, TO> {
     }
 
     public TypeValidateResult<T> result(String prefix) {
-        String fieldname = (prefix != null ? STR."\{prefix}." : "") + fieldName;
+        String fieldname = (prefix != null ? prefix + "." : "") + fieldName;
         return TypeValidateResult.of(field.get(), fieldname, valid, message);
     }
 
