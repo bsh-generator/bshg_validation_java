@@ -4,12 +4,10 @@ import org.bshg.validation.results.TypeValidateResult;
 import org.bshg.validation.typevalidators.TypeValidator;
 import org.bshg.validation.typevalidators.config.ValidatorFnConfig;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
-import java.util.regex.Pattern;
 
-public class ValidatorItem<T, TO> {
+public class ValidatorItem<T, TO> implements IValidatorItem<T, TO> {
     private boolean valid;
     private String message;
     private Supplier<T> field;
@@ -20,34 +18,17 @@ public class ValidatorItem<T, TO> {
         this.message = null;
     }
 
-    private void setMessage(ValidatorFnConfig<T, TO> fn) {
-        var message = fn.messageFn() != null ? fn.messageFn().get() : fn.message();
-        var args = fn.args();
-
-        // Regular expression to find %n patterns
-        var pattern = Pattern.compile("%(\\d+)");
-        var matcher = pattern.matcher(message);
-
-        StringBuilder sb = new StringBuilder();
-        while (matcher.find()) {
-            System.out.println(matcher.group(1));
-            var index = Integer.parseInt(matcher.group(1)) - 1;
-            var replacement = index < args.length ? Arrays.toString(args[index]) : "[null]";
-            // TODO remove [...] from the result
-            matcher.appendReplacement(sb, replacement);
-        }
-        matcher.appendTail(sb);
-
-        this.message = sb.toString();
+    @Override
+    public void setMessage(String message) {
+        this.message = message;
     }
-
 
     public void error(String msg) {
         this.valid = false;
         this.message = msg;
     }
 
-    private void error(ValidatorFnConfig<T, TO> fn) {
+    public void error(ValidatorFnConfig<T, TO> fn) {
         this.valid = false;
         this.setMessage(fn);
     }
@@ -57,7 +38,7 @@ public class ValidatorItem<T, TO> {
     }
 
     public TypeValidateResult<T> result(String prefix) {
-        String fieldname = (prefix != null ? prefix + "." : "") + fieldName;
+        String fieldname = (prefix != null ? STR."\{prefix}." : "") + fieldName;
         return TypeValidateResult.of(field.get(), fieldname, valid, message);
     }
 

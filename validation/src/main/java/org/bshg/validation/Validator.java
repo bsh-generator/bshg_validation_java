@@ -7,19 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class Validator<T> {
+public class Validator<T> implements IValidator<T> {
     private T item;
-    private List<Validator<?>> nestedValidators;
+    private List<IValidator<?>> nestedValidators;
     private List<ValidatorItem<?, T>> validatorItems;
 
     private ValidatorResult results;
-
-    public Validator() {
-    }
-
-    public Validator(T item) {
-        this.item = item;
-    }
 
     public void applyAll() {
         this.validatorItems.forEach(it -> it.validate(this.item));
@@ -59,7 +52,7 @@ public class Validator<T> {
         this.item = item;
     }
 
-    public void setNestedValidators(List<Validator<?>> nestedValidators) {
+    public void setNestedValidators(List<IValidator<?>> nestedValidators) {
         this.nestedValidators = nestedValidators;
     }
 

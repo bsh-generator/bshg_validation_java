@@ -19,12 +19,8 @@ public class Playground {
     }
 
     static class UserValidator extends Validator<User> {
-        public UserValidator(User item) {
-            super(item);
-        }
-
         public static void run(User item) {
-            new UserValidator(item).validate();
+            new UserValidator().validate(item);
         }
 
         private final ValidatorItem<String, User> username = ValidatorItem
