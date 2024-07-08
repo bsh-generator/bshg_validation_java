@@ -6,13 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.bshg</groupId>
     <artifactId>validation</artifactId>
-    <version>${version}</version>
+    <version>0.6.0</version>
     <name>validation</name>
     <packaging>jar</packaging>
 
     <properties>
-        <version>0.6.0</version>
-
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <classmate.version>1.5.1</classmate.version>
