@@ -102,7 +102,7 @@ public class ValidatorItem<T, TO> implements IValidatorItem<T, TO> {
             return this;
         }
 
-        public Builder<T, TO> validations(TypeValidator<T, TO, ?> validation) {
+        public Builder<T, TO> withRules(TypeValidator<T, TO, ?> validation) {
             validatorItem.validations = validation.getValidations();
             return this;
         }
