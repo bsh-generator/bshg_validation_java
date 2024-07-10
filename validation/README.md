@@ -1,6 +1,6 @@
 # @bshg/validation
 
-Welcome to `@bshg/validation` for Java, a versatile Java library crafted for seamless data validation within your projects. this library empowers you to validate data in a declarative manner, ensuring your objects align with your expectations.
+Welcome to `@bshg/validation` for Java, a versatile Java library crafted for seamless data validation within your projects. This library empowers you to validate data in a declarative manner, ensuring your objects align with your expectations.
 
 In this guide, you'll explore the features and functionalities of `@bshg/validation`, learning how to leverage its capabilities to fortify your projects with robust data validation.
 
@@ -14,6 +14,8 @@ Let's dive into the details of how to use this library effectively.
 
 To use our library, add `com.bshg.validation` dependency to your project via Maven or Gradle.
 
+#### Maven
+
 ```xml
 <dependency>
   <groupId>com.bshg.validation</groupId>
@@ -22,13 +24,15 @@ To use our library, add `com.bshg.validation` dependency to your project via Mav
 </dependency>
 ```
 
+#### Gradle
+
 ```groovy
 implementation 'com.bshg.validation:core:<version>'
 ```
 
 ### Quick Example
 
-in this example we will go to use the library to validate this Class:
+In this example, we will use the library to validate this Class:
 
 ```java
 import java.time.LocalDate;
@@ -48,27 +52,27 @@ record User(
 }
 ```
 
-the user class contains:
-- username: must be provided and must be an alphanumeric
-- password: must be provided and have at least 8 chars
-- confirmPassword: required and must have the same value as password
-- age: positive number and optional
-- birthday: optional and must be in the past
-- role: set of roles that must each item have a valid name starts with 'ROLE_' prefix
+The `User` class contains:
+- `username`: must be provided and must be alphanumeric
+- `password`: must be provided and have at least 8 characters
+- `confirmPassword`: required and must have the same value as `password`
+- `age`: positive number and optional
+- `birthday`: optional and must be in the past
+- `roles`: set of roles, each role must have a valid name starting with the `ROLE_` prefix
 
-#### Create The Validator for our User objects
+#### Create the Validator for our `User` objects
 
-we need to create a class that extends `Validator<T>` from `org.bshg.validation`
+We need to create a class that extends `Validator<T>` from `org.bshg.validation`.
 
-````java
+```java
 class UserValidator extends Validator<User> { }
-````
+```
 
-then within it we will decalre the validation rules for each User field:
+Then, within it, we will declare the validation rules for each `User` field:
 
-- for username:
+#### Username Validation
 
-````java
+```java
 ValidatorItem<String, User> username =
     item(() -> this.getItem().username())
         .field("username")
@@ -79,39 +83,40 @@ ValidatorItem<String, User> username =
                         .alphanumeric()
         )
         .build();
-````
+```
 
-let's explain each part:
+Let's explain each part:
 
-- `ValidatorItem<String, User> username` here we declare an attr to validate the username, it is of type `ValidatorItem<Type, TObject>` with `Type` is the type of the field will be validated (e.g. String) and `TObject` is the type of the Object we are validating (e.g. User).
-- `item(() -> this.getItem().username())` is to create an instance of `ValidatorItem`, this method require and `Supplier<Type>` function, must provide it to get the attribute value.
-- `.field("username")` is used to set the name of the validated item, this will be used to know the error message and wish attribute correspond to.
-- `.withRules(...)` this method used to define the rules that will be applied on the attribute.
-- `V.string(this.username)` used to create an object to declare the rules.
-- `.build();` finally you build your validatorItem.
+- `ValidatorItem<String, User> username`: Here we declare an attribute to validate the `username`. It is of type `ValidatorItem<Type, TObject>` with `Type` being the type of the field to be validated (e.g., String) and `TObject` being the type of the object we are validating (e.g., User).
+- `item(() -> this.getItem().username())`: Creates an instance of `ValidatorItem`. This method requires a `Supplier<Type>` function, which provides the attribute value.
+- `.field("username")`: Sets the name of the validated item. This will be used to determine the error message and the corresponding attribute.
+- `.withRules(...)`: Defines the rules that will be applied to the attribute.
+- `V.string(this.username)`: Creates an object to declare the rules.
+- `.build()`: Finally, builds your `ValidatorItem`.
 
-here is the full example:
+Here is the full example:
 
-````java
+```java
 class UserValidator extends Validator<User> {
 
-    // we just add this function to simplify the using of it
+    // Simplify the usage of the validator
     public static void run(User object) {
         new UserValidator().validate(object);
     }
 
-    // validator for username
+    // Validator for username
     private final ValidatorItem<String, User> username =
-            item(() -> this.getItem().username()) // create an instance of type `ValidatorItem<String, User>`
-                    .field("username") // field name
-                    .withRules( // set any rule to be applied on te attribute
-                            V.string(this.username) // call string validator that provide building rules ready to use
-                                    .required() // add required rule
-                                    .notEmpty() // add not empty rule
-                                    .alphanumeric() // add alphanumeric rule
+            item(() -> this.getItem().username())
+                    .field("username")
+                    .withRules(
+                            V.string(this.username)
+                                    .required()
+                                    .notEmpty()
+                                    .alphanumeric()
                     )
-                    .build(); // finally build the validator item
+                    .build();
 
+    // Validator for password
     private final ValidatorItem<String, User> password = ValidatorItem
             .builder(this, () -> this.getItem().password())
             .field("password")
@@ -122,6 +127,7 @@ class UserValidator extends Validator<User> {
             )
             .build();
 
+    // Validator for confirmPassword
     private final ValidatorItem<String, User> confirmPassword = ValidatorItem
             .builder(this, () -> this.getItem().confirmPassword())
             .field("confirmPassword")
@@ -130,34 +136,37 @@ class UserValidator extends Validator<User> {
                             .required()
                             .onError( // define costume validation rule basing on the object itself
                                     (value, object) -> !object.password().equals(value),
-                                    "Passwords not match"
+                                    "Passwords do not match"
                             )
             )
             .build();
 
+    // Validator for age
     private final ValidatorItem<Integer, User> age = ValidatorItem
             .builder(this, () -> this.getItem().age())
             .field("age")
             .withRules(V.integer(this.age).positive())
             .build();
 
+    // Validator for birthday
     private final ValidatorItem<LocalDate, User> birthday = ValidatorItem
             .builder(this, () -> this.getItem().birthday())
             .field("birthday")
             .withRules(V.localDate(this.birthday).past())
             .build();
 
+    // Validator for roles
     private final ValidatorItem<Set<Role>, User> roles = ValidatorItem
             .builder(this, () -> this.getItem().roles())
             .field("roles")
-            .withRules(V.set(this.roles).satisfies(role -> role.name.startsWith("ROLE_")))
+            .withRules(V.set(this.roles).satisfies(role -> role.name().startsWith("ROLE_")))
             .build();
 }
-````
+```
 
-after that the validator will be ready to use it in your application
+### Using the Validator in Your Application
 
-````java
+```java
 public static void main(String[] args) {
     User user = new User(
             "BSH.G",
@@ -175,15 +184,17 @@ public static void main(String[] args) {
         results.forEach(it -> System.out.println(it.getField() + ": " + it.isValid() + " -> " + it.getMessage()));
     }
 }
-````
+```
 
-the result is: 
+The result is:
 
-````text
+```text
 username: false -> Must contain only alphanumeric characters
 password: true -> null
-confirmPassword: false -> Passwords not match
+confirmPassword: false -> Passwords do not match
 age: true -> null
 birthday: true -> null
 roles: false -> All elements must satisfy the condition
-````
+```
+
+With these steps, you can seamlessly integrate and utilize `@bshg/validation` in your Java projects to ensure robust data validation.
