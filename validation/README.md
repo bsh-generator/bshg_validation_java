@@ -4,7 +4,7 @@ Welcome to `@bshg/validation` for Java, a versatile Java library crafted for sea
 
 In this guide, you'll explore the features and functionalities of `@bshg/validation`, learning how to leverage its capabilities to fortify your projects with robust data validation.
 
-Also see the [TypeScript version here]()
+Also see the [TypeScript version here](https://bshg-validation-docs.onrender.com/docs/category/ts-validation-library)
 
 ## Getting Started
 
